@@ -1,0 +1,19 @@
+{
+  "name": "stocklab",
+  "private": true,
+  "version": "1.0.0",
+  "description": "StockLab: sistema de inventario (React + Express + Prisma + PostgreSQL)",
+  "scripts": {
+    "install:all": "npm install && npm install --prefix server && npm install --prefix client",
+    "dev": "concurrently -n api,web -c blue,magenta \"npm run dev --prefix server\" \"npm run dev --prefix client\"",
+    "build": "npm run build --prefix server && npm run build --prefix client",
+    "start": "concurrently -n api,web -c blue,magenta \"npm start --prefix server\" \"npm start --prefix client\"",
+    "test": "npm test --prefix server && npm test --prefix client",
+    "db:migrate": "npm run db:migrate --prefix server",
+    "db:deploy": "npm run db:deploy --prefix server",
+    "db:seed": "npm run db:seed --prefix server"
+  },
+  "devDependencies": {
+    "concurrently": "^9.1.0"
+  }
+}
