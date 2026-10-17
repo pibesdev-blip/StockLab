@@ -57,6 +57,16 @@ npm run dev                            # API en :4000 y web en http://localhost:
 
 Las pruebas del servidor usan la base indicada en `server/.env.test` (`stocklab_test`), que se crea y migra automáticamente y se vacía en cada prueba.
 
+## Despliegue en PibesDev
+
+La app se despliega en el servidor TEST (solo por Tailscale) con Docker y `deploy/deploy.sh`.
+Guía completa, con los pasos para el admin y los comandos: [deploy/README-DEPLOY.md](deploy/README-DEPLOY.md).
+
+```bash
+./deploy/deploy.sh preflight   # comprueba el servidor
+./deploy/deploy.sh install     # primera instalación (después: update)
+```
+
 ## API
 
 Todas las rutas bajo `/api`. Los errores responden `{ "error": { "message", "details?" } }`.

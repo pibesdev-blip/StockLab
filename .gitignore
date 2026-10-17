@@ -7,3 +7,9 @@ dist/
 *.log
 .DS_Store
 coverage/
+
+# Despliegue (valores reales y estado local del servidor)
+deploy/server.env
+deploy/app.env
+deploy/.state/
+deploy/*.generated

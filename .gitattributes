@@ -1,0 +1,5 @@
+# Archivos que se ejecutan o leen en el servidor Linux: siempre LF
+*.sh text eol=lf
+Dockerfile text eol=lf
+.dockerignore text eol=lf
+deploy/** text eol=lf
