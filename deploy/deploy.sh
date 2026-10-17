@@ -405,6 +405,8 @@ deploy_frontend() {
   docker build -f client/Dockerfile --target frontend \
     --output "type=local,dest=$WEB_ROOT/dist.new" client || return 1
   [[ -f "$WEB_ROOT/dist.new/index.html" ]] || { warn "El build no generó index.html"; return 1; }
+  # Caddy corre con su propio usuario: necesita leer archivos y atravesar carpetas.
+  chmod -R a+rX "$WEB_ROOT/dist.new" || return 1
   rm -rf "$WEB_ROOT/dist.prev" || return 1
   if [[ -d "$WEB_ROOT/dist" ]]; then mv "$WEB_ROOT/dist" "$WEB_ROOT/dist.prev" || return 1; fi
   mv "$WEB_ROOT/dist.new" "$WEB_ROOT/dist"
