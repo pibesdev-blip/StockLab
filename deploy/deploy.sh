@@ -271,6 +271,14 @@ cmd_preflight() {
     check_subnet
   fi
 
+  # Archivos creados antes con otro usuario (por ejemplo, ejecutando con sudo) rompen chmod/mv/rm.
+  local foreign
+  foreign="$(find "$STATE_DIR" "$WEB_ROOT" ! -user "$(id -u)" -print -quit 2> /dev/null || true)"
+  if [[ -n "$foreign" ]]; then
+    pf_error "Hay archivos que no son de $(id -un) (ej. $foreign)" \
+      "Pedile al admin: sudo chown -R $(id -un):$(id -gn) $ROOT_DIR/$STATE_DIR $WEB_ROOT"
+  fi
+
   if [[ -d "$WEB_ROOT" && -w "$WEB_ROOT" ]]; then
     pf_ok "WEB_ROOT $WEB_ROOT existe y es escribible"
   elif has_frontend; then
